@@ -1527,7 +1527,6 @@
     <!-- Music Toggle -->
     <button class="music-btn" id="music-btn" aria-label="Toggle ambient music" title="Toggle Music">
         <span class="music-icon">♪</span>
-        <span class="music-hint" id="music-hint">Tap for Music</span>
     </button>
 
     <!-- ============================================================
@@ -1925,9 +1924,9 @@
                AMBIENT MUSIC — Random track selection
             ========================================================= */
             var musicBtn = document.getElementById('music-btn');
-            var musicHint = document.getElementById('music-hint');
             var bgAudio = document.getElementById('bg-audio');
             var playing = false;
+            var fadeInterval = null;
             var musicTracks = ['Bismillah.mp3', 'KunfayaKun.mp3', 'ShukranAllah.mp3'];
             var trackPicked = false;
 
@@ -1940,20 +1939,30 @@
             function startMusic() {
                 if (playing) return;
                 if (!trackPicked) pickRandomTrack();
-                bgAudio.volume = 1;
-                bgAudio.play().catch(function () { });
+                bgAudio.volume = 0.4;
+                bgAudio.play().then(function () {
+                    clearInterval(fadeInterval);
+                    fadeInterval = setInterval(function () {
+                        if (bgAudio.volume < 0.99) {
+                            bgAudio.volume = Math.min(bgAudio.volume + 0.01, 1);
+                        } else {
+                            bgAudio.volume = 1;
+                            clearInterval(fadeInterval);
+                        }
+                    }, 80);
+                }).catch(function () { });
                 playing = true;
                 musicBtn.classList.add('playing');
-                musicBtn.querySelector('.music-icon').textContent = '\u266B';
-                if (musicHint) musicHint.classList.add('hidden');
+                musicBtn.querySelector('.music-icon').textContent = '⏸';
             }
 
             function stopMusic() {
                 if (!playing) return;
+                clearInterval(fadeInterval);
                 bgAudio.pause();
                 playing = false;
                 musicBtn.classList.remove('playing');
-                musicBtn.querySelector('.music-icon').textContent = '\u266A';
+                musicBtn.querySelector('.music-icon').textContent = '▶';
             }
 
             musicBtn.addEventListener('click', function (e) {
@@ -1973,11 +1982,6 @@
             }
             document.addEventListener('touchstart', handleFirstInteraction, { once: true, passive: true });
             document.addEventListener('click', handleFirstInteraction, { once: true });
-
-            // Hide hint after 6 seconds
-            setTimeout(function () {
-                if (musicHint) musicHint.classList.add('hidden');
-            }, 6000);
 
         })();
     </script>
