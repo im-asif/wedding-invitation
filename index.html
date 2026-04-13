@@ -104,117 +104,105 @@
         }
 
         /* =============================================
-           PRELOADER
+           WELCOME SCREEN
         ============================================= */
-        #preloader {
+        #welcome-screen {
             position: fixed;
             inset: 0;
-            background: var(--deep-green);
-            z-index: 9999;
+            background: radial-gradient(ellipse at center, var(--mid-green), var(--deep-green));
+            z-index: 10000;
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-direction: column;
-            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.2s;
-        }
-
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .preloader-ring {
-            width: 120px;
-            height: 120px;
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .preloader-ring::before,
-        .preloader-ring::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 1.5px solid transparent;
-        }
-
-        .preloader-ring::before {
-            border-top-color: var(--gold-primary);
-            border-right-color: var(--gold-primary);
-            animation: ringSpinA 1.4s linear infinite;
-        }
-
-        .preloader-ring::after {
-            border-bottom-color: var(--gold-bright);
-            border-left-color: var(--gold-bright);
-            inset: 8px;
-            animation: ringSpinB 1.0s linear infinite reverse;
-        }
-
-        .preloader-star {
-            position: absolute;
-            inset: 0;
-            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.4rem;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease 0.8s;
+        }
+
+        #welcome-screen.hidden {
+            transform: translateY(-100vh);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .welcome-ornament {
+            font-size: 3rem;
             color: var(--gold-primary);
-            animation: preloaderPulse 2s ease-in-out infinite;
+            margin-bottom: 20px;
+            animation: welcomePulse 2s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(201, 168, 76, 0.4);
         }
 
-        @keyframes ringSpinA {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes ringSpinB {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes preloaderPulse {
+        @keyframes welcomePulse {
 
             0%,
             100% {
-                opacity: 0.5;
-                transform: scale(0.9);
+                transform: scale(1);
+                opacity: 0.7;
             }
 
             50% {
-                opacity: 1;
                 transform: scale(1.1);
+                opacity: 1;
             }
         }
 
-        .preloader-names {
+        .welcome-names-text {
             font-family: 'Alex Brush', cursive;
-            font-size: 2.8rem;
-            background: linear-gradient(135deg, var(--gold-dark), var(--gold-bright), var(--gold-dark));
-            background-clip: text;
-            -webkit-background-clip: text;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary), var(--gold-bright), var(--gold-primary), var(--gold-dark));
+            background-size: 300% auto;
             color: transparent;
-            background-size: 200% auto;
-            animation: textShimmer 2s linear infinite;
-            letter-spacing: 4px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: goldShimmer 4s linear infinite;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
         }
 
-        .preloader-sub {
+        .welcome-sub {
             font-size: 0.7rem;
             letter-spacing: 4px;
             color: var(--text-muted);
-            margin-top: 8px;
             text-transform: uppercase;
-            font-weight: 500;
-            animation: fadeInUp 0.8s ease forwards;
+            margin-bottom: 40px;
         }
 
-        @keyframes textShimmer {
-            to {
-                background-position: 200% center;
-            }
+        .open-btn {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            font-family: 'Cinzel Decorative', serif;
+            padding: 16px 44px;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            cursor: pointer;
+            border-radius: 50px;
+            text-transform: uppercase;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .open-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), transparent);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .open-btn:hover,
+        .open-btn:active {
+            background: rgba(201, 168, 76, 0.12);
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 40px rgba(201, 168, 76, 0.2), 0 0 0 1px rgba(201, 168, 76, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .open-btn:hover::before {
+            opacity: 1;
         }
 
         /* =============================================
@@ -1501,13 +1489,12 @@
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="preloader-ring">
-            <div class="preloader-star">✦</div>
-        </div>
-        <div class="preloader-names">Asif &amp; Shabana</div>
-        <div class="preloader-sub">A Divine Union Awaits</div>
+    <!-- Welcome Screen with Open Invitation -->
+    <div id="welcome-screen">
+        <div class="welcome-ornament" aria-hidden="true">✦</div>
+        <div class="welcome-names-text">Asif &amp; Shabana</div>
+        <div class="welcome-sub">A Divine Union Awaits</div>
+        <button class="open-btn" id="open-btn">Open Invitation</button>
     </div>
 
     <!-- Background Layers -->
@@ -1525,14 +1512,15 @@
     <audio id="bg-audio" loop preload="auto"></audio>
 
     <!-- Music Toggle -->
-    <button class="music-btn" id="music-btn" aria-label="Toggle ambient music" title="Toggle Music">
-        <span class="music-icon">♪</span>
+    <button class="music-btn" id="music-btn" aria-label="Toggle ambient music" title="Toggle Music"
+        style="display:none;">
+        <span class="music-icon">▶</span>
     </button>
 
     <!-- ============================================================
          MAIN CONTENT
     ============================================================ -->
-    <div class="page-wrapper">
+    <div class="page-wrapper" id="main-content" style="opacity:0;">
 
         <!-- ===== HERO SECTION ===== -->
         <section class="hero" id="hero">
@@ -1721,19 +1709,38 @@
         (function () {
             'use strict';
 
-            /* =========================================================
-               PRELOADER
-            ========================================================= */
-            window.addEventListener('load', function () {
-                var preloader = document.getElementById('preloader');
-                if (preloader) {
-                    setTimeout(function () {
-                        preloader.classList.add('hidden');
-                        document.querySelectorAll('.hero .reveal').forEach(function (el, i) {
-                            setTimeout(function () { el.classList.add('active'); }, i * 200);
-                        });
-                    }, 900);
-                }
+            var mainContent = document.getElementById('main-content');
+            var welcomeScreen = document.getElementById('welcome-screen');
+            var openBtn = document.getElementById('open-btn');
+            var musicBtn = document.getElementById('music-btn');
+            var bgAudio = document.getElementById('bg-audio');
+            var playing = false;
+            var fadeInterval = null;
+            var isTouch = window.matchMedia('(pointer: coarse)').matches;
+            var isMobile = window.innerWidth < 600;
+            var musicTracks = ['Bismillah.mp3', 'KunfayaKun.mp3', 'ShukranAllah.mp3'];
+            var trackPicked = false;
+
+            function pickRandomTrack() {
+                var idx = Math.floor(Math.random() * musicTracks.length);
+                bgAudio.src = musicTracks[idx];
+                trackPicked = true;
+            }
+
+            /* OPEN INVITATION */
+            openBtn.addEventListener('click', function () {
+                welcomeScreen.classList.add('hidden');
+                setTimeout(function () {
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transition = 'opacity 1s ease';
+                    musicBtn.style.display = 'flex';
+                    // Start music automatically on open
+                    startMusic();
+                    // Trigger hero reveals
+                    document.querySelectorAll('.hero .reveal').forEach(function (el, i) {
+                        setTimeout(function () { el.classList.add('active'); }, i * 200);
+                    });
+                }, 600);
             });
 
             /* =========================================================
@@ -1793,8 +1800,6 @@
             var particles = [];
             var petals = [];
             var rafId;
-            var isMobile = window.innerWidth < 600;
-            var isTouch = window.matchMedia('(pointer: coarse)').matches;
 
             var resizeTimer;
             function resize() {
@@ -1921,21 +1926,8 @@
             }
 
             /* =========================================================
-               AMBIENT MUSIC — Random track selection
+               AMBIENT MUSIC — Random track, 40% start with gradual increase
             ========================================================= */
-            var musicBtn = document.getElementById('music-btn');
-            var bgAudio = document.getElementById('bg-audio');
-            var playing = false;
-            var fadeInterval = null;
-            var musicTracks = ['Bismillah.mp3', 'KunfayaKun.mp3', 'ShukranAllah.mp3'];
-            var trackPicked = false;
-
-            function pickRandomTrack() {
-                var idx = Math.floor(Math.random() * musicTracks.length);
-                bgAudio.src = musicTracks[idx];
-                trackPicked = true;
-            }
-
             function startMusic() {
                 if (playing) return;
                 if (!trackPicked) pickRandomTrack();
@@ -1953,7 +1945,7 @@
                 }).catch(function () { });
                 playing = true;
                 musicBtn.classList.add('playing');
-                musicBtn.querySelector('.music-icon').textContent = '⏸';
+                musicBtn.querySelector('.music-icon').textContent = '\u23f8';
             }
 
             function stopMusic() {
@@ -1962,7 +1954,7 @@
                 bgAudio.pause();
                 playing = false;
                 musicBtn.classList.remove('playing');
-                musicBtn.querySelector('.music-icon').textContent = '▶';
+                musicBtn.querySelector('.music-icon').textContent = '\u25b6';
             }
 
             musicBtn.addEventListener('click', function (e) {
@@ -1970,18 +1962,6 @@
                 if (!playing) startMusic();
                 else stopMusic();
             });
-
-            // Auto-play on first user interaction
-            var firstInteraction = true;
-            function handleFirstInteraction() {
-                if (!firstInteraction) return;
-                firstInteraction = false;
-                startMusic();
-                document.removeEventListener('touchstart', handleFirstInteraction);
-                document.removeEventListener('click', handleFirstInteraction);
-            }
-            document.addEventListener('touchstart', handleFirstInteraction, { once: true, passive: true });
-            document.addEventListener('click', handleFirstInteraction, { once: true });
 
         })();
     </script>
