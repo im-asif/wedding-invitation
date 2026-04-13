@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Alex+Brush&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-green: #0A1F14;
+            --mid-green: #112A1C;
+            --gold-primary: #C9A84C;
+            --gold-bright: #F0D080;
+            --gold-dark: #8B6914;
+            --ivory: #FDF8EF;
+            --ivory-dim: #EDE4D0;
+            --text-muted: rgba(253, 248, 239, 0.65);
+        }
+
+        /* 
+           Set to standard A4 ratio for print.
+           When printing from Chrome, select "Save as PDF", 
+           Paper Size: A4, Margins: None, and check "Background graphics".
+        */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--deep-green);
+            color: var(--ivory);
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            /* A4 dimensions at 96 DPI approximation for rendering */
+            width: 210mm;
+            height: 296mm;
+            margin: 0 auto;
+            position: relative;
+            background: radial-gradient(ellipse at center, var(--mid-green), var(--deep-green));
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            overflow: hidden;
+        }
+
+        /* Outer border acting as physical wedding card frame */
+        .card-wrapper {
+            position: absolute;
+            top: 12mm;
+            left: 12mm;
+            right: 12mm;
+            bottom: 12mm;
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 8px;
+            padding: 10mm 15mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, transparent 40%, transparent 60%, rgba(201, 168, 76, 0.05) 100%);
+            overflow: hidden;
+        }
+
+        /* Inner ornamental border */
+        .card-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 5mm;
+            left: 5mm;
+            right: 5mm;
+            bottom: 5mm;
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        /* Decorative Corners */
+        .corner {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--gold-primary);
+        }
+        .corner.tl { top: 10mm; left: 10mm; }
+        .corner.tr { top: 10mm; right: 10mm; }
+        .corner.bl { bottom: 10mm; left: 10mm; }
+        .corner.br { bottom: 10mm; right: 10mm; }
+
+        /* HEADER */
+        .header { margin-top: 5px; }
+        .bismillah-arabic {
+            font-size: 2.8rem;
+            color: var(--gold-primary);
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+        .bismillah-english {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.5rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--ivory-dim);
+            margin-bottom: 0px;
+            line-height: 1.4;
+        }
+
+        /* NAMES */
+        .names-section {
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .couple-name {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.4rem;
+            color: var(--gold-bright);
+            line-height: 1.1;
+            margin: 2px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .parent-name {
+            font-size: 0.55rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+        .ampersand {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.4rem;
+            color: var(--gold-primary);
+            margin: 2px 0;
+        }
+
+        /* DIVIDERS */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold-primary);
+        }
+        .divider-icon {
+            color: var(--gold-primary);
+            font-size: 1.1rem;
+            margin: 0 15px;
+        }
+
+        /* EVENTS */
+        .events-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 5px;
+            margin-bottom: 5px;
+        }
+        .event-box {
+            flex: 1;
+            padding: 10px 10px;
+        }
+        .event-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.95rem;
+            color: var(--gold-bright);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .detail-label {
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .detail-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ivory);
+            margin-bottom: 10px;
+        }
+        .detail-value.gold {
+            color: var(--gold-primary);
+        }
+        .events-separator {
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold-primary), transparent);
+            margin: 15px 0;
+        }
+
+        /* HOSTS */
+        .hosts-section {
+            margin-top: 5px;
+        }
+        .hosts-heading {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .host-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .host-address {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .welcoming {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+        .welcoming span {
+            color: var(--gold-bright);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* CLOSING */
+        .closing {
+            margin-top: auto;
+            padding-bottom: 5px;
+        }
+        .closing-arabic {
+            font-size: 1.45rem;
+            color: var(--gold-primary);
+            margin-bottom: 6px;
+        }
+        .closing-eng {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--gold-bright);
+        }
+    </style>
+</head>
+<body>
+    <div class="card-wrapper">
+        <div class="corner tl">☽</div>
+        <div class="corner tr">✦</div>
+        <div class="corner bl">✧</div>
+        <div class="corner br">☾</div>
+
+        <div class="header">
+            <div class="bismillah-arabic">﷽</div>
+            <div class="bismillah-english">In the Name of Allah, the Most Beneficent, the Most Merciful</div>
+            <div class="intro">
+                With the choicest blessings of Allah &amp; with the grace of His Nabi ﷺ,<br>
+                we joyfully invite you to the wedding celebration of
+            </div>
+        </div>
+
+        <div class="names-section">
+            <div class="couple-name">Asif Iqbal</div>
+            <div class="parent-name">Son of Md Asghar Kamal</div>
+            <div class="ampersand">&amp;</div>
+            <div class="couple-name">Shabana Yasmin</div>
+            <div class="parent-name">Daughter of Md Junaid Alam</div>
+        </div>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon">❖</div>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="events-container">
+            <div class="event-box">
+                <div class="event-title">Nikah Ceremony</div>
+                <div class="detail-label">Date</div>
+                <div class="detail-value gold">13th May, 2026</div>
+                <div class="detail-label">Timing</div>
+                <div class="detail-value">7:00 PM Onwards</div>
+                <div class="detail-label">Venue</div>
+                <div class="detail-value">Sareya Narendra<br>Gopalganj, Bihar</div>
+            </div>
+            
+            <div class="events-separator"></div>
+
+            <div class="event-box">
+                <div class="event-title">Dawat-E-Walima</div>
+                <div class="detail-label">Date</div>
+                <div class="detail-value gold">14th May, 2026</div>
+                <div class="detail-label">Timing</div>
+                <div class="detail-value">6:00 PM Onwards</div>
+                <div class="detail-label">Venue</div>
+                <div class="detail-value">Amwa Mahuawa<br>Sheohar, Bihar</div>
+            </div>
+        </div>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon">❧</div>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="hosts-section">
+            <div class="hosts-heading">Hosted By</div>
+            <div class="host-name">Master Md Asghar Kamal</div>
+            <div class="host-address">
+                At+Po: Mahuawa, Ps: Piprahi<br>
+                Dist: Sheohar, Bihar
+            </div>
+            
+            <div class="welcoming">
+                Waiting to Welcome You<br>
+                Md Azhar Jamal &nbsp;·&nbsp; Md Zafar Kaifi<br>
+                Md Ashraf Aquil &nbsp;·&nbsp; Md Kalim Ahmad<br>
+                <span>All Relatives &amp; Friends</span>
+            </div>
+        </div>
+
+        <div class="closing">
+            <div class="closing-arabic">فِي الدُّنْيَا وَالآخِرَةِ</div>
+            <div class="closing-eng">"In this world and the next"</div>
+        </div>
+    </div>
+</body>
+</html>
