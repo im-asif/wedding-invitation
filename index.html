@@ -1668,17 +1668,10 @@
             var musicBtn = document.getElementById('music-btn');
             var bgAudio = document.getElementById('bg-audio');
             var playing = false;
+            var targetVolume = 0.20;
             var fadeInterval = null;
             var isTouch = window.matchMedia('(pointer: coarse)').matches;
             var isMobile = window.innerWidth < 600;
-            var musicTracks = ['Bismillah.mp3', 'KunfayaKun.mp3', 'ShukranAllah.mp3'];
-            var trackPicked = false;
-
-            function pickRandomTrack() {
-                var idx = Math.floor(Math.random() * musicTracks.length);
-                bgAudio.src = musicTracks[idx];
-                trackPicked = true;
-            }
 
             /* OPEN INVITATION */
             openBtn.addEventListener('click', function () {
@@ -1688,7 +1681,10 @@
                     mainContent.style.transition = 'opacity 1s ease';
                     musicBtn.style.display = 'flex';
                     // Start music automatically on open
-                    startMusic();
+                    fadeAudioIn();
+                    playing = true;
+                    musicBtn.classList.add('playing');
+                    musicBtn.querySelector('.music-icon').textContent = '\u266B';
                     // Trigger hero reveals
                     document.querySelectorAll('.hero .reveal').forEach(function (el, i) {
                         setTimeout(function () { el.classList.add('active'); }, i * 200);
