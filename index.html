@@ -7,7 +7,7 @@
 
     <title>Wedding Invitation | Asif &amp; Shabana</title>
     <meta name="description"
-        content="With the blessings of Allah, we are delighted to invite you to our Wedding Ceremony on May 13th &amp; 14th, 2026.">
+        content="With the blessings of Allah, we are delighted to invite you to our Dawat-e-Walima on May 14th, 2026.">
     <meta name="theme-color" content="#0A1F14">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,14 +15,14 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Fid dunya wal akhirah | Wedding Invitation | Asif &amp; Shabana">
     <meta property="og:description"
-        content="Please join us to celebrate our Nikah &amp; Walima on May 13th and 14th, 2026. Click to view our invitation.">
+        content="Please join us to celebrate our Dawat-e-Walima on May 14th, 2026. Click to view our invitation.">
     <meta property="og:image" content="https://im-asif.github.io/wedding-invitation/preview.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Wedding Invitation | Asif &amp; Shabana">
     <meta name="twitter:description"
-        content="Please join us to celebrate our Nikah &amp; Walima on May 13th and 14th, 2026.">
+        content="Please join us to celebrate our Dawat-e-Walima on May 14th, 2026.">
     <meta name="twitter:image" content="https://im-asif.github.io/wedding-invitation/preview.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -692,12 +692,23 @@
             }
         }
 
+        .bride-location {
+            font-size: 0.55rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            opacity: 0.75;
+            margin: 0 0 8px;
+            display: block;
+        }
+
         /* =============================================
            EVENTS CARDS
         ============================================= */
         .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            justify-content: center;
             gap: 32px;
             margin-bottom: 40px;
         }
@@ -1396,47 +1407,6 @@
             }
         }
 
-        .music-hint {
-            position: absolute;
-            right: 64px;
-            top: 50%;
-            transform: translateY(-50%);
-            white-space: nowrap;
-            font-size: 0.65rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--gold-primary);
-            background: rgba(10, 31, 20, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 8px 16px;
-            pointer-events: none;
-            animation: hintPulse 2.5s ease-in-out infinite;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .music-hint.hidden {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        @keyframes hintPulse {
-
-            0%,
-            100% {
-                opacity: 0.7;
-                transform: translateY(-50%) translateX(0);
-            }
-
-            50% {
-                opacity: 1;
-                transform: translateY(-50%) translateX(-4px);
-            }
-        }
-
         /* Animated ring around music button */
         .music-btn::before {
             content: '';
@@ -1509,12 +1479,12 @@
     <div class="corner-ornament br" aria-hidden="true">☾</div>
 
     <!-- Audio Element -->
-    <audio id="bg-audio" loop preload="auto"></audio>
+    <audio id="bg-audio" src="Bismillah.mp3" loop preload="auto"></audio>
 
     <!-- Music Toggle -->
     <button class="music-btn" id="music-btn" aria-label="Toggle ambient music" title="Toggle Music"
         style="display:none;">
-        <span class="music-icon">▶</span>
+        <span class="music-icon">♪</span>
     </button>
 
     <!-- ============================================================
@@ -1544,7 +1514,7 @@
 
             <p class="intro-text reveal delay-2">
                 With the choicest blessings of Allah &amp; with the grace of His Nabi ﷺ,<br>
-                we joyfully invite you to the wedding celebration of
+                we joyfully invite you to the Dawat-e-Walima of
             </p>
 
             <div class="names-block reveal delay-3">
@@ -1559,6 +1529,7 @@
 
                 <span class="couple-name">Shabana Yasmin</span>
                 <span class="parent-name">Daughter of Md Junaid Alam</span>
+                <span class="bride-location">Sareya Narendra, Gopalganj, Bihar</span>
             </div>
 
             <div class="scroll-indicator" aria-hidden="true">
@@ -1592,44 +1563,19 @@
             </div>
         </section>
 
-        <!-- ===== EVENTS SECTION ===== -->
         <section id="events">
             <div class="section-badge reveal">Mark Your Calendar</div>
             <h2 class="section-title reveal delay-1">Save <span>The Date</span></h2>
 
             <div class="events-grid">
-                <!-- Nikah Card -->
-                <div class="event-card reveal from-left delay-2" id="nikah-card">
-                    <div class="card-corner tl"></div>
-                    <div class="card-corner tr"></div>
-                    <div class="card-corner bl"></div>
-                    <div class="card-corner br"></div>
-
-                    <span class="event-icon" aria-hidden="true">🌙</span>
-                    <h3 class="event-title">Nikah Ceremony</h3>
-
-                    <div class="event-detail">
-                        <span class="detail-label">Date</span>
-                        <span class="detail-value gold">13th May, 2026</span>
-                    </div>
-                    <div class="event-detail">
-                        <span class="detail-label">Timing</span>
-                        <span class="detail-value">7:00 PM Onwards</span>
-                    </div>
-                    <div class="event-detail">
-                        <span class="detail-label">Venue</span>
-                        <span class="detail-value">Sareya Narendra<br>Gopalganj, Bihar</span>
-                    </div>
-                </div>
-
                 <!-- Walima Card -->
-                <div class="event-card reveal from-right delay-3" id="walima-card">
+                <div class="event-card reveal delay-2" id="walima-card" style="max-width: 560px; width: 100%;">
                     <div class="card-corner tl"></div>
                     <div class="card-corner tr"></div>
                     <div class="card-corner bl"></div>
                     <div class="card-corner br"></div>
 
-                    <span class="event-icon" aria-hidden="true" style="animation-delay: 1s;">✨</span>
+                    <span class="event-icon" aria-hidden="true">✨</span>
                     <h3 class="event-title">Dawat-E-Walima</h3>
 
                     <div class="event-detail">
@@ -1767,7 +1713,7 @@
             /* =========================================================
                COUNTDOWN
             ========================================================= */
-            var targetDate = new Date('May 13, 2026 19:00:00').getTime();
+            var targetDate = new Date('May 14, 2026 18:00:00').getTime();
             var prevSecs = -1;
 
             function updateCountdown() {
@@ -1933,35 +1879,50 @@
             }
 
             /* =========================================================
-               AMBIENT MUSIC — Random track, 40% start with gradual increase
+               AMBIENT MUSIC
             ========================================================= */
-            function startMusic() {
-                if (playing) return;
-                if (!trackPicked) pickRandomTrack();
-                bgAudio.volume = 0.4;
+            function fadeAudioIn() {
+                bgAudio.volume = 0;
                 bgAudio.play().then(function () {
                     clearInterval(fadeInterval);
                     fadeInterval = setInterval(function () {
-                        if (bgAudio.volume < 0.99) {
-                            bgAudio.volume = Math.min(bgAudio.volume + 0.01, 1);
+                        if (bgAudio.volume < targetVolume - 0.01) {
+                            bgAudio.volume = Math.min(bgAudio.volume + 0.005, targetVolume);
                         } else {
-                            bgAudio.volume = 1;
+                            bgAudio.volume = targetVolume;
                             clearInterval(fadeInterval);
                         }
-                    }, 80);
+                    }, 50);
                 }).catch(function () { });
+            }
+
+            function fadeAudioOut() {
+                clearInterval(fadeInterval);
+                fadeInterval = setInterval(function () {
+                    if (bgAudio.volume > 0.01) {
+                        bgAudio.volume = Math.max(bgAudio.volume - 0.01, 0);
+                    } else {
+                        bgAudio.volume = 0;
+                        bgAudio.pause();
+                        clearInterval(fadeInterval);
+                    }
+                }, 30);
+            }
+
+            function startMusic() {
+                if (playing) return;
+                fadeAudioIn();
                 playing = true;
                 musicBtn.classList.add('playing');
-                musicBtn.querySelector('.music-icon').textContent = '\u23f8';
+                musicBtn.querySelector('.music-icon').textContent = '\u266B';
             }
 
             function stopMusic() {
                 if (!playing) return;
-                clearInterval(fadeInterval);
-                bgAudio.pause();
+                fadeAudioOut();
                 playing = false;
                 musicBtn.classList.remove('playing');
-                musicBtn.querySelector('.music-icon').textContent = '\u25b6';
+                musicBtn.querySelector('.music-icon').textContent = '\u266A';
             }
 
             musicBtn.addEventListener('click', function (e) {

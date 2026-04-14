@@ -2,347 +2,354 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Wedding Invitation</title>
+    <title>Walima Invitation — Asif &amp; Shabana</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Alex+Brush&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-green: #0A1F14;
-            --mid-green: #112A1C;
-            --gold-primary: #C9A84C;
-            --gold-bright: #F0D080;
-            --gold-dark: #8B6914;
-            --ivory: #FDF8EF;
-            --ivory-dim: #EDE4D0;
-            --text-muted: rgba(253, 248, 239, 0.65);
+            --deep:    #0A1F14;
+            --mid:     #112A1C;
+            --gold:    #C9A84C;
+            --gold-br: #F0D080;
+            --gold-dk: #8B6914;
+            --ivory:   #FDF8EF;
+            --ivory-d: #EDE4D0;
+            --muted:   rgba(253, 248, 239, 0.60);
+            --border:  rgba(201, 168, 76, 0.35);
         }
 
-        /* 
-           Set to standard A4 ratio for print.
-           When printing from Chrome, select "Save as PDF", 
-           Paper Size: A4, Margins: None, and check "Background graphics".
-        */
-        @page {
-            size: A4 portrait;
-            margin: 0;
-        }
+        @page { size: A4 portrait; margin: 0; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--deep-green);
-            color: var(--ivory);
             font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(ellipse at 40% 30%, #142E1E 0%, #0A1F14 70%);
+            color: var(--ivory);
             text-align: center;
-            /* A4 dimensions at 96 DPI approximation for rendering */
             width: 210mm;
             height: 296mm;
             margin: 0 auto;
             position: relative;
-            background: radial-gradient(ellipse at center, var(--mid-green), var(--deep-green));
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
             overflow: hidden;
         }
 
-        /* Outer border acting as physical wedding card frame */
-        .card-wrapper {
-            position: absolute;
-            top: 12mm;
-            left: 12mm;
-            right: 12mm;
-            bottom: 12mm;
-            border: 1.5px solid var(--gold-primary);
-            border-radius: 8px;
-            padding: 10mm 15mm;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, transparent 40%, transparent 60%, rgba(201, 168, 76, 0.05) 100%);
-            overflow: hidden;
-        }
-
-        /* Inner ornamental border */
-        .card-wrapper::after {
+        /* ── Background texture dots ── */
+        body::before {
             content: '';
             position: absolute;
-            top: 5mm;
-            left: 5mm;
-            right: 5mm;
-            bottom: 5mm;
-            border: 1px solid rgba(201, 168, 76, 0.4);
-            border-radius: 4px;
-            pointer-events: none;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(201,168,76,0.07) 1px, transparent 1px);
+            background-size: 18px 18px;
         }
 
-        /* Decorative Corners */
+        /* ── Outer card frame ── */
+        .frame {
+            position: absolute;
+            top: 10mm; left: 10mm; right: 10mm; bottom: 10mm;
+            border: 1.5px solid var(--gold);
+            border-radius: 10px;
+        }
+        /* inner thin border */
+        .frame::before {
+            content: '';
+            position: absolute;
+            top: 4mm; left: 4mm; right: 4mm; bottom: 4mm;
+            border: 0.75px solid var(--border);
+            border-radius: 6px;
+        }
+        /* subtle corner glow */
+        .frame::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 60px rgba(201,168,76,0.06), 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        /* ── Corner ornaments ── */
         .corner {
             position: absolute;
-            font-size: 2rem;
-            color: var(--gold-primary);
-        }
-        .corner.tl { top: 10mm; left: 10mm; }
-        .corner.tr { top: 10mm; right: 10mm; }
-        .corner.bl { bottom: 10mm; left: 10mm; }
-        .corner.br { bottom: 10mm; right: 10mm; }
-
-        /* HEADER */
-        .header { margin-top: 5px; }
-        .bismillah-arabic {
-            font-size: 2.8rem;
-            color: var(--gold-primary);
-            margin-bottom: 4px;
+            font-size: 1.6rem;
+            color: var(--gold);
             line-height: 1;
+            opacity: 0.85;
         }
-        .bismillah-english {
+        .corner.tl { top:  8mm; left:  8mm; }
+        .corner.tr { top:  8mm; right: 8mm; }
+        .corner.bl { bottom: 8mm; left:  8mm; }
+        .corner.br { bottom: 8mm; right: 8mm; }
+
+        /* ── Main content wrapper ── */
+        .card {
+            position: absolute;
+            top: 16mm; left: 16mm; right: 16mm; bottom: 16mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ── HEADER ── */
+        .header { width: 100%; }
+
+        .bismillah {
+            font-size: 3rem;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 5px;
+            text-shadow: 0 0 30px rgba(201,168,76,0.3);
+        }
+        .bismillah-eng {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 0.5rem;
+            font-size: 0.48rem;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 12px;
+            color: var(--muted);
+            margin-bottom: 14px;
         }
         .intro {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
             font-style: italic;
-            color: var(--ivory-dim);
-            margin-bottom: 0px;
-            line-height: 1.4;
+            font-size: 1rem;
+            color: var(--ivory-d);
+            line-height: 1.5;
         }
 
-        /* NAMES */
-        .names-section {
-            margin: 10px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        /* ── NAMES ── */
+        .names { width: 100%; }
+
         .couple-name {
             font-family: 'Alex Brush', cursive;
-            font-size: 3.4rem;
-            color: var(--gold-bright);
+            font-size: 3.8rem;
+            color: var(--gold-br);
             line-height: 1.1;
-            margin: 2px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
-        .parent-name {
-            font-size: 0.55rem;
+        .sub {
+            font-size: 0.5rem;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 4px;
-            margin-bottom: 8px;
+            color: var(--muted);
+            margin: 3px 0 5px;
         }
-        .ampersand {
+        .loc {
+            font-size: 0.44rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.8;
+            margin-bottom: 6px;
+        }
+        .amp {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 1.4rem;
-            color: var(--gold-primary);
-            margin: 2px 0;
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin: 4px 0;
         }
 
-        /* DIVIDERS */
+        /* ── DIVIDER ── */
         .divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            margin: 10px 0;
+            width: 70%;
+            gap: 12px;
         }
-        .divider-line {
-            width: 60px;
-            height: 1px;
-            background: var(--gold-primary);
-        }
-        .divider-icon {
-            color: var(--gold-primary);
-            font-size: 1.1rem;
-            margin: 0 15px;
-        }
-
-        /* EVENTS */
-        .events-container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0 5px;
-            margin-bottom: 5px;
-        }
-        .event-box {
+        .div-line {
             flex: 1;
-            padding: 10px 10px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
-        .event-title {
+        .div-icon { color: var(--gold); font-size: 1rem; }
+
+        /* ── EVENT PANEL ── */
+        .event-panel {
+            width: 68%;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 28px 20px;
+            background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02));
+            position: relative;
+        }
+        /* top glow line */
+        .event-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 15%; right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .event-icon {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .event-name {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 0.95rem;
-            color: var(--gold-bright);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-        .detail-label {
-            font-size: 0.5rem;
+            font-size: 1rem;
+            color: var(--gold-br);
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 4px;
+            margin-bottom: 16px;
         }
-        .detail-value {
+        .row { margin-bottom: 12px; }
+        .lbl {
+            font-size: 0.45rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+        .val {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--ivory);
-            margin-bottom: 10px;
+            line-height: 1.3;
         }
-        .detail-value.gold {
-            color: var(--gold-primary);
-        }
-        .events-separator {
-            width: 1px;
-            background: linear-gradient(to bottom, transparent, var(--gold-primary), transparent);
-            margin: 15px 0;
-        }
+        .val.gold { color: var(--gold); }
 
-        /* HOSTS */
-        .hosts-section {
-            margin-top: 5px;
-        }
-        .hosts-heading {
+        /* ── HOSTS ── */
+        .hosts { width: 100%; }
+
+        .hosts-label {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             letter-spacing: 3px;
-            color: var(--gold-primary);
-            margin-bottom: 8px;
             text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
         }
         .host-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 3px;
         }
-        .host-address {
-            font-size: 0.7rem;
-            color: var(--text-muted);
+        .host-addr {
+            font-size: 0.62rem;
+            color: var(--muted);
             line-height: 1.5;
+            margin-bottom: 10px;
         }
-        .welcoming {
+        .welcome-head {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.55rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.75;
+            margin-bottom: 5px;
+        }
+        .welcome-names {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-top: 12px;
-            line-height: 1.6;
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.7;
         }
-        .welcoming span {
-            color: var(--gold-bright);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
+        .welcome-names .hi { color: var(--gold-br); font-weight: 600; }
 
-        /* CLOSING */
-        .closing {
-            margin-top: auto;
-            padding-bottom: 5px;
+        /* ── CLOSING ── */
+        .closing { width: 100%; }
+        .cl-arabic {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 4px;
         }
-        .closing-arabic {
-            font-size: 1.45rem;
-            color: var(--gold-primary);
-            margin-bottom: 6px;
-        }
-        .closing-eng {
+        .cl-eng {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
             font-style: italic;
-            color: var(--gold-bright);
+            font-size: 1rem;
+            color: var(--gold-br);
         }
     </style>
 </head>
 <body>
-    <div class="card-wrapper">
+
+    <div class="frame">
         <div class="corner tl">☽</div>
         <div class="corner tr">✦</div>
         <div class="corner bl">✧</div>
         <div class="corner br">☾</div>
+    </div>
 
+    <div class="card">
+
+        <!-- HEADER -->
         <div class="header">
-            <div class="bismillah-arabic">﷽</div>
-            <div class="bismillah-english">In the Name of Allah, the Most Beneficent, the Most Merciful</div>
+            <div class="bismillah">﷽</div>
+            <div class="bismillah-eng">In the Name of Allah, the Most Beneficent, the Most Merciful</div>
             <div class="intro">
                 With the choicest blessings of Allah &amp; with the grace of His Nabi ﷺ,<br>
-                we joyfully invite you to the wedding celebration of
+                we joyfully invite you to the <strong>Dawat-e-Walima</strong> of
             </div>
         </div>
 
-        <div class="names-section">
+        <!-- NAMES -->
+        <div class="names">
             <div class="couple-name">Asif Iqbal</div>
-            <div class="parent-name">Son of Md Asghar Kamal</div>
-            <div class="ampersand">&amp;</div>
+            <div class="sub">Son of Md Asghar Kamal</div>
+            <div class="amp">&amp;</div>
             <div class="couple-name">Shabana Yasmin</div>
-            <div class="parent-name">Daughter of Md Junaid Alam</div>
+            <div class="sub">Daughter of Md Junaid Alam</div>
+            <div class="loc">Sareya Narendra, Gopalganj, Bihar</div>
         </div>
 
+        <!-- DIVIDER -->
         <div class="divider">
-            <div class="divider-line"></div>
-            <div class="divider-icon">❖</div>
-            <div class="divider-line"></div>
+            <div class="div-line"></div>
+            <div class="div-icon">❖</div>
+            <div class="div-line"></div>
         </div>
 
-        <div class="events-container">
-            <div class="event-box">
-                <div class="event-title">Nikah Ceremony</div>
-                <div class="detail-label">Date</div>
-                <div class="detail-value gold">13th May, 2026</div>
-                <div class="detail-label">Timing</div>
-                <div class="detail-value">7:00 PM Onwards</div>
-                <div class="detail-label">Venue</div>
-                <div class="detail-value">Sareya Narendra<br>Gopalganj, Bihar</div>
+        <!-- EVENT PANEL -->
+        <div class="event-panel">
+            <span class="event-icon">✨</span>
+            <div class="event-name">Dawat-E-Walima</div>
+            <div class="row">
+                <div class="lbl">Date</div>
+                <div class="val gold">14th May, 2026 — Thursday</div>
             </div>
-            
-            <div class="events-separator"></div>
-
-            <div class="event-box">
-                <div class="event-title">Dawat-E-Walima</div>
-                <div class="detail-label">Date</div>
-                <div class="detail-value gold">14th May, 2026</div>
-                <div class="detail-label">Timing</div>
-                <div class="detail-value">6:00 PM Onwards</div>
-                <div class="detail-label">Venue</div>
-                <div class="detail-value">Amwa Mahuawa<br>Sheohar, Bihar</div>
+            <div class="row">
+                <div class="lbl">Timing</div>
+                <div class="val">6:00 PM Onwards</div>
+            </div>
+            <div class="row" style="margin-bottom:0;">
+                <div class="lbl">Venue</div>
+                <div class="val">Amwa Mahuawa, Sheohar, Bihar</div>
             </div>
         </div>
 
+        <!-- DIVIDER -->
         <div class="divider">
-            <div class="divider-line"></div>
-            <div class="divider-icon">❧</div>
-            <div class="divider-line"></div>
+            <div class="div-line"></div>
+            <div class="div-icon">❧</div>
+            <div class="div-line"></div>
         </div>
 
-        <div class="hosts-section">
-            <div class="hosts-heading">Hosted By</div>
+        <!-- HOSTS -->
+        <div class="hosts">
+            <div class="hosts-label">Hosted By</div>
             <div class="host-name">Master Md Asghar Kamal</div>
-            <div class="host-address">
-                At+Po: Mahuawa, Ps: Piprahi<br>
-                Dist: Sheohar, Bihar
-            </div>
-            
-            <div class="welcoming">
-                Waiting to Welcome You<br>
-                Md Azhar Jamal &nbsp;·&nbsp; Md Zafar Kaifi<br>
-                Md Ashraf Aquil &nbsp;·&nbsp; Md Kalim Ahmad<br>
-                <span>All Relatives &amp; Friends</span>
+            <div class="host-addr">At+Po: Mahuawa, Ps: Piprahi, Dist: Sheohar, Bihar</div>
+            <div class="welcome-head">Waiting to Welcome You</div>
+            <div class="welcome-names">
+                Md Azhar Jamal &nbsp;·&nbsp; Md Zafar Kaifi &nbsp;·&nbsp; Md Ashraf Aquil &nbsp;·&nbsp; Md Kalim Ahmad<br>
+                <span class="hi">All Relatives &amp; Friends</span>
             </div>
         </div>
 
+        <!-- CLOSING -->
         <div class="closing">
-            <div class="closing-arabic">فِي الدُّنْيَا وَالآخِرَةِ</div>
-            <div class="closing-eng">"In this world and the next"</div>
+            <div class="cl-arabic">فِي الدُّنْيَا وَالآخِرَةِ</div>
+            <div class="cl-eng">"In this world and the next"</div>
         </div>
+
     </div>
+
 </body>
 </html>
